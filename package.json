@@ -1,0 +1,7 @@
+{
+    "name"        : "suzuka",
+    "version"     : "0.1.0dev",
+    "description" : "server for relaying live events",
+    "dependencies" : { "socket.io" : ">=0.5.3" },
+    "bin"          : { "suzuka" : "./lib/suzuka.js" }
+}
