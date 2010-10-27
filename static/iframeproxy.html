@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8" /><script type="text/javascript" src="/socketio.js"></script><script type="text/javascript">
+
+var hash             = (location.href.split('#')[1] || ''),
+    useHashTransport = (hash === 'hash-transport');
+
+alert('use hash transport: ' + (useHashTransport ? 'yes' : 'no'));
+
+function publish (data) {
+    if (useHashTransport) {
+        parent.location.hash = encodeURIComponent(data);
+    }
+    else {
+        parent.postMessage(data, "*");
+    }
+}
+
+var socket = new io.Socket();
+socket.on('message', publish);
+socket.on('disconnect', function () {
+    socket.connect();
+});
+socket.connect();
+
+</script></head><body></body></html>

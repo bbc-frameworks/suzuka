@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+        <meta charset="utf-8" />
+        <script type="text/javascript" src="/suzuka.js"></script>       
+        <script type="text/javascript">
+          
+            window.onload = function () {
+                var form = document.getElementsByTagName('form')[0];
+                form.onsubmit = function () {
+                    
+                    var req = new XMLHttpRequest();
+                    req.open('POST', '/', true);
+                    req.onreadystatechange = function () {
+                        if (req.readyState === 4) {
+                            form.elements[0].value = 'Done';
+                            form.elements[0].disabled = false;
+                            setTimeout(function () {
+                                form.elements[0].value = 'Post...';
+                            }, 500);
+                        }
+                    };
+                    req.send((new Date()).getTime().toString());
+                    form.elements[0].disabled = true;
+                    form.elements[0].value = 'Sending...';
+                    return false;
+                };
+
+
+                var receieved = document.getElementById('receieved');
+
+                var suzuka = new Suzuka(null, location.hash === '#force-hash-transport');
+                suzuka.subscribe(function (e) {
+                    var item = document.createElement('li');
+                    var ms = (new Date()).getTime() - parseInt(e, 10);
+                    item.innerText = 'event received in ' + ms + 'ms';
+                    received.insertBefore(item, received.firstChild);
+                });
+            };
+        </script>
+    </head>
+    <body>
+        <h1>Suzuka Test</h1>
+
+        <p>
+            <script type="text/javascript">
+                
+            </script>
+        </p>
+
+        <h2>Post Event</h2>
+
+        <form method="POST">
+            <p>
+                <input type="submit" value="Post...">
+            </p>
+        </form>
+
+        <h2>Receieved Events</h2>
+
+        <ul id="received"></ul>
+    </body>
+</html>
