@@ -32,7 +32,7 @@
                 suzuka.subscribe(function (e) {
                     var item = document.createElement('li');
                     var ms = (new Date()).getTime() - parseInt(e, 10);
-                    item.innerText = 'event received in ' + ms + 'ms';
+                    item.appendChild(document.createTextNode('event received in ' + ms + 'ms'));
                     received.insertBefore(item, received.firstChild);
                 });
             };
