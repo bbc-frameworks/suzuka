@@ -3,8 +3,6 @@
 var hash             = (location.href.split('#')[1] || ''),
     useHashTransport = (hash === 'hash-transport');
 
-alert('use hash transport: ' + (useHashTransport ? 'yes' : 'no'));
-
 function publish (data) {
     if (useHashTransport) {
         parent.location.hash = encodeURIComponent(data);
