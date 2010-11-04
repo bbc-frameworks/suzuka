@@ -12,8 +12,14 @@ function publish (data) {
     }
 }
 
-var socket = new io.Socket();
+//io.setPath('/socket.io/');
+var socket = new io.Socket(location.hostname);
 socket.on('message', publish);
+socket.on('error', function () {
+    alert('error');
+});
+socket.on('connect', function () {
+});
 socket.on('disconnect', function () {
     socket.connect();
 });
