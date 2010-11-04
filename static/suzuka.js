@@ -1,22 +1,20 @@
 
 var Suzuka = function () {
-/*
-    alert('in Suzuka ' + window.io);
+
 
     if ('io' in window) {
-        alert('found io in window');
         var Suzuka = function (host) {
             this._host = host;
         };
 
         Suzuka.prototype.subscribe = function (callback) {
-            var socket = new io.Socket(this._host);
+            var socket = new io.Socket(this._host, { "transports" : [ "flashsocket" ] });
             socket.on('message', callback);
             socket.on('error', function () {
                 alert('error');
             });
             socket.on('connect', function () {
-                alert('connected');
+
             });
             socket.on('disconnect', function () {
                 socket.connect();
@@ -26,7 +24,7 @@ var Suzuka = function () {
 
         return Suzuka;
     }
-*/
+
     var Suzuka = function (host, forceHashTransport) {
         if (! host) {
             host = '';
