@@ -1,11 +1,34 @@
 
 var Suzuka = function () {
 
-    var Suzuka = function (urlPrefix, forceHashTransport) {
-        if (! urlPrefix) {
-            urlPrefix = '';
+    if ('io' in window) {
+        var Suzuka = function (host) {
+            this._host = host;
+        };
+
+        Suzuka.prototype.subscribe = function (callback) {
+            var socket = new io.Socket(this._host, { "transports" : [ "flashsocket", "websocket" ], "rememberTransport" : false });
+            socket.on('message', callback);
+            socket.on('error', function () {
+                alert('error');
+            });
+            socket.on('connect', function () {
+
+            });
+            socket.on('disconnect', function () {
+                socket.connect();
+            });
+            socket.connect();
+        };
+
+        return Suzuka;
+    }
+
+    var Suzuka = function (host, forceHashTransport) {
+        if (! host) {
+            host = '';
         }
-        this._proxyUrl = urlPrefix + '/iframeproxy';
+        this._proxyUrl = host + '/iframeproxy';
         this._forceHashTransport = forceHashTransport;
     };
 
