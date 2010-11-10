@@ -7,7 +7,7 @@ var Suzuka = function () {
         };
 
         Suzuka.prototype.subscribe = function (callback) {
-            var socket = new io.Socket(this._host, { "transports" : [ "flashsocket", "websocket" ], "rememberTransport" : false });
+            var socket = new io.Socket(this._host, { "rememberTransport" : false });
             socket.on('message', callback);
             socket.on('error', function () {
                 alert('error');
