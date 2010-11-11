@@ -10,7 +10,7 @@
                 form.onsubmit = function () {
                     
                     var req = new XMLHttpRequest();
-                    req.open('POST', '/', true);
+                    req.open('POST', form.action, true);
                     req.onreadystatechange = function () {
                         if (req.readyState === 4) {
                             form.elements[0].value = 'Done';
@@ -49,7 +49,7 @@
 
         <h2>Post Event</h2>
 
-        <form method="POST">
+        <form method="POST" action="<%= PUBLISH_PATH %>">
             <p>
                 <input type="submit" value="Post...">
             </p>
